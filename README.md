@@ -1,37 +1,11 @@
 
-```markdown
-# Perovskite Crystallization Analysis Pipeline
-
-This project analyzes Perovskite solar cell efficiency based on deposition methods (1-Step vs. 2-Step). It transforms an exploratory Jupyter Notebook into a production-ready Python pipeline that cleans data, trains **Decision Tree Regressors**, and generates performance visualizations automatically.
-
-## 📂 Project Structure
-
-| File | Description |
-| :--- | :--- |
-| `data_management.py` | Handles loading the Excel dataset, cleaning outliers (PCE > 27), and splitting data into **1-Step** and **2-Step** deposition subsets. |
-| `model_training.py` | Contains the `ModelTrainer` class which wraps a **Decision Tree Regressor**. Handles training, evaluation (R² & MSE), and saving the model to `.pkl`. |
-| `visualization.py` | Generates plots for model performance (Actual vs. Predicted) and feature importance, saving them as `.png` files. |
-| `main.py` | The entry point. It orchestrates the pipeline: loads data, runs separate experiments for 1-step and 2-step data, and saves all artifacts. |
-| `requirements.txt` | List of Python dependencies required to run the project. |
-| `.github/workflows/` | Configuration to run this pipeline automatically on GitHub. |
-
-## 🚀 How to Run Locally
-
-### 1. Prerequisites
-Ensure you have Python installed. It is recommended to use a virtual environment.
-
-### 2. Install Dependencies
-Run the following command to install the necessary libraries (pandas, scikit-learn, matplotlib, etc.):
-```bash
+### 1. Install Dependencies
 pip install -r requirements.txt
 
-```
-
-### 3. Place Your Data
-
+### 2. Place Your Data
 Ensure your dataset file (`Perovskite_FAIR_database_ORIGINAL_all_data.xlsx`) is in the root directory of this project.
 
-### 4. Execute the Pipeline
+### 3. Execute the Pipeline
 
 Run the main script:
 
@@ -39,21 +13,6 @@ Run the main script:
 python main.py
 
 ```
-
-## ☁️ How to Run on GitHub (No Local Installation)
-
-This repository is configured with **GitHub Actions** to run the analysis in the cloud.
-
-1. **Push** your code (and the Excel data file if it's small enough, or host it externally) to the `main` branch.
-2. Navigate to the **Actions** tab in your GitHub repository.
-3. Click on the **"Run ML Pipeline"** workflow on the left sidebar.
-4. Wait for the job to finish (Green Checkmark ✅).
-5. Click on the specific run, then scroll down to the **Artifacts** section.
-6. Download **`experiment-results`**. This ZIP file contains:
-* Trained Models (`model_1_step.pkl`, `model_2_step.pkl`)
-* Prediction Plots (`1_step_predictions.png`, etc.)
-* Feature Importance Charts
-
 
 
 ## 📊 Outputs
@@ -67,11 +26,3 @@ After running the pipeline, the following files will be generated:
 * `*_feature_importance.png`: Bar charts showing which chemical/process features impacted efficiency the most.
 
 
-
-## 🛠 Model Details
-
-* **Algorithm**: Decision Tree Regressor
-* **Splitting Strategy**: The pipeline automatically detects `Perovskite_deposition_number_of_deposition_steps` and trains two separate models to account for different crystallization kinetics.
-* **Filtering**: Outliers with `JV_reverse_scan_PCE > 27` are removed before training.
-
-```
