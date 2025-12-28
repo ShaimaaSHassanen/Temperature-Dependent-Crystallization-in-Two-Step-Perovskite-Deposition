@@ -75,5 +75,3 @@ After running the pipeline, the following files will be generated:
 * **Filtering**: Outliers with `JV_reverse_scan_PCE > 27` are removed before training.
 
 ```
-
-```
